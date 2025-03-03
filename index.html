@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X (Twitter) Engagement Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f8fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #000000;
+        }
+        .kpi-card h3 {
+            color: #000000;
+            margin-top: 0;
+        }
+        .kpi-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #14171A;
+            margin: 10px 0;
+        }
+        .kpi-description {
+            color: #657786;
+            font-size: 14px;
+        }
+        .visualization {
+            margin-top: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 1500px;
+            border: none;
+            overflow: hidden;
+            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+        iframe::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #000000;
+        }
+        .explanation h2 {
+            color: #000000;
+            margin-top: 0;
+        }
+        .explanation p {
+            color: #657786;
+            margin-bottom: 15px;
+        }
+        .explanation ul {
+            color: #657786;
+            margin: 0;
+            padding-left: 20px;
+        }
+        .explanation li {
+            margin-bottom: 8px;
+        }
+        .data-source {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #000000;
+        }
+        .data-source h2 {
+            color: #000000;
+            margin-top: 0;
+        }
+        .data-source p {
+            color: #657786;
+            margin-bottom: 15px;
+        }
+        .data-source a {
+            color: #000000;
+            text-decoration: none;
+            border-bottom: 1px solid #000000;
+        }
+        .data-source a:hover {
+            border-bottom: 2px solid #000000;
+        }
+        .data-source ul {
+            color: #657786;
+            margin: 0;
+            padding-left: 20px;
+        }
+        .data-source li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>X Engagement Analysis</h1>
+        
+        <div class="data-source">
+            <h2>Data Source</h2>
+            <p>This analysis is based on posts from the "Software Development" community on X, collected over the last 7 days.</p>
+            <ul>
+                <li>Raw data: <a href="community_software_dev.json">community_software_dev.json</a></li>
+                <li>Analysis script: <a href="visualizer.py">visualizer.py</a></li>
+            </ul>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Average Engagement</h3>
+                <div class="kpi-value">845.6</div>
+                <div class="kpi-description">Median: 144.0</div>
+            </div>
+            
+            <div class="kpi-card">
+                <h3>Above Average Probability</h3>
+                <div class="kpi-value">12.4%</div>
+                <div class="kpi-description">Posts exceeding 845.6 engagements</div>
+            </div>
+            
+            <div class="kpi-card">
+                <h3>Short Post Success Rate</h3>
+                <div class="kpi-value">15.4%</div>
+                <div class="kpi-description">Posts under 150 characters exceeding average</div>
+            </div>
+            
+            <div class="kpi-card">
+                <h3>Top 10% Threshold</h3>
+                <div class="kpi-value">1109.6</div>
+                <div class="kpi-description">Engagements for top performing posts</div>
+            </div>
+            
+            <div class="kpi-card">
+                <h3>Most Common Media Count</h3>
+                <div class="kpi-value">0</div>
+                <div class="kpi-description">Media items in engaging posts</div>
+            </div>
+            
+            <div class="kpi-card">
+                <h3>Large Accounts</h3>
+                <div class="kpi-value">16.0%</div>
+                <div class="kpi-description">Posts from accounts with >1000 followers</div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>Understanding Engagement</h2>
+            <p>Engagement is calculated as the sum of all interactions with a post:</p>
+            <ul>
+                <li>Views: Number of times the post was viewed</li>
+                <li>Quotes: Number of times the post was quoted</li>
+                <li>Replies: Number of direct replies to the post</li>
+                <li>Reposts: Number of times the post was reposted</li>
+            </ul>
+            <p>For example, if a post has 100 views, 5 quotes, 3 replies, and 2 reposts, its total engagement would be 110.</p>
+            <p>This metric helps understand the overall reach and interaction level of posts, with higher numbers indicating more successful content.</p>
+        </div>
+
+        <div class="visualization">
+            <iframe src="tweet_analysis.html"></iframe>
+        </div>
+    </div>
+</body>
+</html>
