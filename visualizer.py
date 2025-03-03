@@ -55,6 +55,10 @@ above_avg_prob = (above_avg_tweets / total_tweets) * 100
 above_median_prob = (above_median_tweets / total_tweets) * 100
 short_tweet_success_rate = (high_engagement_short_tweets / short_tweets) * 100
 
+# Calculate date range for the filtered data
+start_date = df['created_at'].min().strftime('%B %d, %Y')
+end_date = df['created_at'].max().strftime('%B %d, %Y')
+
 # Create KPI text
 kpi_text = f"""
 Key Performance Indicators:
@@ -393,7 +397,7 @@ html_content = f"""
         
         <div class="data-source">
             <h2>Data Source</h2>
-            <p>This analysis is based on posts from the "Software Development" community on X, collected over the last 7 days.</p>
+            <p>This analysis is based on posts from the "Software Development" community on X, collected from {start_date} to {end_date}.</p>
             <ul>
                 <li>Raw data: <a href="community_software_dev.json">community_software_dev.json</a></li>
                 <li>Analysis script: <a href="visualizer.py">visualizer.py</a></li>
